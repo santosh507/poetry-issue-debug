@@ -31,5 +31,4 @@ jobs:
 
             - name: Run unit tests & Generate Coverage report
               run: |
-                  pytest -s -vv --cov=semantor tests
-                  
+                  pytest -s -vv                   
