@@ -26,7 +26,7 @@ jobs:
                   pip install --upgrade pip
                   pip install poetry
                   poetry config virtualenvs.create false
-                  poetry install --with dev --all-extras
+                  poetry install --with dev --all-extras --no-root
                   pip install coverage
 
             - name: Run unit tests & Generate Coverage report
