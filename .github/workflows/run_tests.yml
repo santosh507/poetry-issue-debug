@@ -1,0 +1,35 @@
+name: Unit Tests
+
+on:
+    pull_request:
+        branches:
+            - main
+            - dev
+        types: [opened, synchronize]
+    workflow_dispatch:
+
+jobs:
+    unit-tests:
+        runs-on: [ubuntu-latest]
+
+        steps:
+            - name: Checkout the branch
+              uses: actions/checkout@v3
+
+            - name: Install Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: 3.x
+
+            - name: Install dependencies
+              run: |
+                  pip install --upgrade pip
+                  pip install poetry
+                  poetry config virtualenvs.create false
+                  poetry install --with dev --all-extras
+                  pip install coverage
+
+            - name: Run unit tests & Generate Coverage report
+              run: |
+                  pytest -s -vv --cov=semantor tests
+                  

